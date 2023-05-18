@@ -1,5 +1,6 @@
 package com.turkcellGY.inventoryservice.business.concretes;
 
+import com.turkcellGY.commonpackage.utils.mappers.ModelMapperService;
 import com.turkcellGY.inventoryservice.business.abstracts.ModelService;
 import com.turkcellGY.inventoryservice.business.dto.requests.create.CreateModelRequest;
 import com.turkcellGY.inventoryservice.business.dto.requests.update.UpdateModelRequest;
@@ -7,6 +8,9 @@ import com.turkcellGY.inventoryservice.business.dto.responses.create.CreateModel
 import com.turkcellGY.inventoryservice.business.dto.responses.get.GetAllModelsResponse;
 import com.turkcellGY.inventoryservice.business.dto.responses.get.GetModelResponse;
 import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateModelResponse;
+import com.turkcellGY.inventoryservice.business.rules.ModelBusinessRules;
+import com.turkcellGY.inventoryservice.entities.Model;
+import com.turkcellGY.inventoryservice.repository.ModelRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,28 +20,54 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 public class ModelManager implements ModelService {
+    private final ModelRepository repository;
+    private final ModelMapperService mapper;
+    private final ModelBusinessRules rules;
+
     @Override
     public List<GetAllModelsResponse> getAll() {
-        return null;
+        var models = repository.findAll();
+        var response = models
+                .stream()
+                .map(model -> mapper.forResponse().map(model, GetAllModelsResponse.class))
+                .toList();
+
+        return response;
     }
 
     @Override
     public GetModelResponse getById(UUID id) {
-        return null;
+        rules.checkIfModelExists(id);
+        var model = repository.findById(id).orElseThrow();
+        var response = mapper.forResponse().map(model, GetModelResponse.class);
+
+        return response;
     }
 
     @Override
     public CreateModelResponse add(CreateModelRequest request) {
-        return null;
+        var model = mapper.forRequest().map(request, Model.class);
+        model.setId(null);
+        repository.save(model);
+        var response = mapper.forResponse().map(model, CreateModelResponse.class);
+
+        return response;
     }
 
     @Override
-    public UpdateModelResponse update(UpdateModelRequest request) {
-        return null;
+    public UpdateModelResponse update(UUID id, UpdateModelRequest request) {
+        rules.checkIfModelExists(id);
+        var model = mapper.forRequest().map(request, Model.class);
+        model.setId(id);
+        repository.save(model);
+        var response = mapper.forResponse().map(model, UpdateModelResponse.class);
+
+        return response;
     }
 
     @Override
     public void delete(UUID id) {
-
+        rules.checkIfModelExists(id);
+        repository.deleteById(id);
     }
 }

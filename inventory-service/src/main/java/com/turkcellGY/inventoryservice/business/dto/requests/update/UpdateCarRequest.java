@@ -1,10 +1,9 @@
 package com.turkcellGY.inventoryservice.business.dto.requests.update;
 
+import com.turkcellGY.commonpackage.utils.annotations.NotFutureYear;
+import com.turkcellGY.commonpackage.utils.constans.Regex;
 import com.turkcellGY.inventoryservice.entities.enums.State;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +19,12 @@ public class UpdateCarRequest {
     @NotNull
     @NotBlank
     private UUID modelId;
-    //TODO: NotFuture custom annotation
+    @NotFutureYear
     @Min(value = 2000)
     private int modelYear;
     @NotBlank
     @NotNull
-    //TODO: Add Regex
+    @Pattern(regexp = Regex.Plate)
     private String plate;
     @NotBlank
     @NotNull

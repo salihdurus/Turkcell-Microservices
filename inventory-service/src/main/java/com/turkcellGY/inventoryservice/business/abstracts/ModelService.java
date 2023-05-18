@@ -17,7 +17,7 @@ public interface ModelService {
 
     CreateModelResponse add(CreateModelRequest request);
 
-    UpdateModelResponse update(UpdateModelRequest request);
+    UpdateModelResponse update(UUID id, UpdateModelRequest request);
 
     void delete(UUID id);
 }
