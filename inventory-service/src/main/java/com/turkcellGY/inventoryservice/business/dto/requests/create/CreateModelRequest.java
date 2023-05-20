@@ -16,7 +16,6 @@ import java.util.UUID;
 @Setter
 public class CreateModelRequest {
     @NotNull
-    @NotBlank
     private UUID brandId;
     @NotBlank
     @Size(min = 2,max = 20)

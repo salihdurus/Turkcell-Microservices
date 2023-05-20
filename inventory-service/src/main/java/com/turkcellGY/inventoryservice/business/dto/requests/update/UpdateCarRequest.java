@@ -17,7 +17,6 @@ import java.util.UUID;
 @Setter
 public class UpdateCarRequest {
     @NotNull
-    @NotBlank
     private UUID modelId;
     @NotFutureYear
     @Min(value = 2000)
@@ -26,7 +25,6 @@ public class UpdateCarRequest {
     @NotNull
     @Pattern(regexp = Regex.Plate)
     private String plate;
-    @NotBlank
     @NotNull
     private State state;
     @Min(value = 1)

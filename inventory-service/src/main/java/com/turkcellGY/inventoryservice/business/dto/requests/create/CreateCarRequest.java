@@ -20,7 +20,6 @@ import java.util.UUID;
 @Setter
 public class CreateCarRequest {
     @NotNull
-    @NotBlank
     private UUID modelId;
     @NotFutureYear
     @Min(value = 2000)

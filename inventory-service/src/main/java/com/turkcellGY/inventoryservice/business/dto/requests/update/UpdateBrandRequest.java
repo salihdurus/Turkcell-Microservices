@@ -17,7 +17,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class UpdateBrandRequest {
-    @NotBlank
     @Size(min = 2, max = 20)
     private String name;
 }

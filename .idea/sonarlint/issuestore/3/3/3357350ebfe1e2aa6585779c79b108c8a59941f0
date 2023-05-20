@@ -1,0 +1,12 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(İ«ñÿÿÿÿÿ
+g
+java:S1128"QRemove this unused import 'com.turkcellGY.inventoryservice.entities.enums.State'.(£¶—»
+Z
+java:S1128"?Remove this unused import 'jakarta.validation.constraints.Min'.(Ê¸ñüøÿÿÿÿ
+f
+java:S1128"DRemove this unused import 'jakarta.validation.constraints.NotBlank'.(ÕØ¡Õøÿÿÿÿ8¦¨—²ƒ1
+^
+java:S1128"CRemove this unused import 'jakarta.validation.constraints.NotNull'.(Àª•ıÿÿÿÿ
+F
+java:S1128"+Remove this unused import 'java.util.UUID'.(ÀãÄ£úÿÿÿÿ
