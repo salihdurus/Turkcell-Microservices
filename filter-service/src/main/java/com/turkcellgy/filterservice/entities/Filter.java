@@ -9,21 +9,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
 @Setter
+@Getter
 @Document
+@NoArgsConstructor
+@AllArgsConstructor
 public class Filter {
     @Id
     private UUID id;
-    private UUID brandId;
-    private UUID modelId;
     private UUID carId;
+    private UUID modelId;
+    private UUID brandId;
     private String modelName;
     private String brandName;
     private String plate;
-    private String modelYear;
+    private int modelYear;
     private double dailyPrice;
     private String state;
 }

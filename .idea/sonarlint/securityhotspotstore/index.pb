@@ -1,5 +1,23 @@
 
 §
 tinventory-service/src/main/java/com/turkcellGY/inventoryservice/business/dto/requests/update/UpdateBrandRequest.java,3\3\3357350ebfe1e2aa6585779c79b108c8a59941f0
-I
-inventory-service/pom.xml,e\3\e347da292c40d252c508703eddff460d1f378f1c
+¢
+rinventory-service/src/main/java/com/turkcellGY/inventoryservice/business/dto/requests/update/UpdateCarRequest.java,3\7\3746e8f2aa6cfd64f5417d83969eb99134bc4e5d
+§
+tinventory-service/src/main/java/com/turkcellGY/inventoryservice/business/dto/requests/create/CreateBrandRequest.java,1\4\14635b0b470e33653ceeab34c1ab15df69e31e69
+§
+tinventory-service/src/main/java/com/turkcellGY/inventoryservice/business/dto/requests/create/CreateModelRequest.java,e\d\ed5b6ae508551d628bf19a90ec5a16b86d58a985
+¢
+rinventory-service/src/main/java/com/turkcellGY/inventoryservice/business/dto/requests/create/CreateCarRequest.java,8\d\8da71742096b58ce160bf5558b7dcfcb77b5aec5
+ó
+gfilter-service/src/main/java/com/turkcellgy/filterservice/business/dto/responses/GetFilterResponse.java,1\3\1317db7874dbdd2c550228459537117fb83290c1
+õ
+kfilter-service/src/main/java/com/turkcellgy/filterservice/business/dto/responses/GetAllFiltersResponse.java,b\b\bbf3a100380e93020999bb5636b0d4ce0ab969d8
+è
+_filter-service/src/main/java/com/turkcellgy/filterservice/business/abstracts/FilterService.java,1\e\1e22a7b745a2101e46b1c992412c24009e641d29
+é
+^filter-service/src/main/java/com/turkcellgy/filterservice/business/concrete/FilterManager.java,d\5\d50ad54c878df7ab0c24d2ea0457782fad19e6eb
+ä
+Zfilter-service/src/main/java/com/turkcellgy/filterservice/repository/FilterRepository.java,f\3\f3d6ef40529149e2470094e5de9c3b1708e01092
+~
+Nfilter-service/src/main/java/com/turkcellgy/filterservice/entities/Filter.java,d\a\da22b5113dfca4edb07e4d902ca155b122209d5c
