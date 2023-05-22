@@ -20,15 +20,16 @@ import java.util.UUID;
 public class FiltersController {
     private final FilterService service;
 
-    @PostConstruct
-    public void createDb(){
-        System.err.println("Post Construct Çalıştı");
-        System.err.println("Post Construct Çalıştı");
-        System.err.println("Post Construct Çalıştı");
-        System.err.println("Post Construct Çalıştı");
-        System.err.println("Post Construct Çalıştı");
-        service.add(new Filter());
-    }
+//    Databaseyi oluşturmak için
+//    @PostConstruct
+//    public void createDb(){
+//        System.err.println("Post Construct Çalıştı");
+//        System.err.println("Post Construct Çalıştı");
+//        System.err.println("Post Construct Çalıştı");
+//        System.err.println("Post Construct Çalıştı");
+//        System.err.println("Post Construct Çalıştı");
+//        service.add(new Filter());
+//    }
     @GetMapping
     public List<GetAllFiltersResponse> getAll(){
         return service.getAll();

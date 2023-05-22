@@ -1,5 +1,7 @@
 package com.turkcellGY.inventoryservice.business.concretes;
 
+import com.turkcellGY.commonpackage.events.inventory.CarCreatedEvent;
+import com.turkcellGY.commonpackage.events.inventory.CarDeletedEvent;
 import com.turkcellGY.commonpackage.utils.mappers.ModelMapperService;
 import com.turkcellGY.inventoryservice.business.abstracts.CarService;
 import com.turkcellGY.inventoryservice.business.dto.requests.create.CreateCarRequest;
@@ -11,6 +13,7 @@ import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateCarRe
 import com.turkcellGY.inventoryservice.business.rules.CarBusinessRules;
 import com.turkcellGY.inventoryservice.entities.Car;
 import com.turkcellGY.inventoryservice.entities.enums.State;
+import com.turkcellGY.inventoryservice.kafka.producer.InventoryProducer;
 import com.turkcellGY.inventoryservice.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,7 @@ public class CarManager implements CarService {
     private final CarRepository repository;
     private final ModelMapperService mapper;
     private final CarBusinessRules rules;
+    private final InventoryProducer producer;
 
     @Override
     public List<GetAllCarsResponse> getAll() {
@@ -48,14 +52,15 @@ public class CarManager implements CarService {
     @Override
     public CreateCarResponse add(CreateCarRequest request) {
         var car = mapper.forRequest().map(request, Car.class);
-        car.setId(null);
+        car.setId(UUID.randomUUID());
         car.setState(State.Available);
-        repository.save(car);
-        var response = mapper.forResponse().map(car, CreateCarResponse.class);
+        var createdCar = repository.save(car);
+        sendKafkaCarCreatedEvent(createdCar);
+
+        var response = mapper.forResponse().map(createdCar, CreateCarResponse.class);
 
         return response;
     }
-
     @Override
     public UpdateCarResponse update(UUID id, UpdateCarRequest request) {
         rules.checkIfCarExists(id);
@@ -71,5 +76,19 @@ public class CarManager implements CarService {
     public void delete(UUID id) {
         rules.checkIfCarExists(id);
         repository.deleteById(id);
+        sendKafkaCarDeletedEvent(id);
+    }
+
+    private void sendKafkaCarDeletedEvent(UUID id) {
+        //Car deleted event
+        CarDeletedEvent event=new CarDeletedEvent();
+        event.setCarId(id);
+        producer.sendMessage(event);
+    }
+
+    private void sendKafkaCarCreatedEvent(Car createdCar) {
+        // Car created event
+        var event = mapper.forResponse().map(createdCar, CarCreatedEvent.class);
+        producer.sendMessage(event);
     }
 }
