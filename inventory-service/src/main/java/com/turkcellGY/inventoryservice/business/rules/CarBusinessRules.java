@@ -1,5 +1,7 @@
 package com.turkcellGY.inventoryservice.business.rules;
 
+import com.turkcellGY.commonpackage.utils.exceptions.BusinessException;
+import com.turkcellGY.inventoryservice.entities.enums.State;
 import com.turkcellGY.inventoryservice.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,8 +15,13 @@ public class CarBusinessRules {
 
     public void checkIfCarExists(UUID id) {
         if (!repository.existsById(id)) {
-            // TODO: BusinessException
-            throw new RuntimeException("CAR_NOT_EXISTS");
+            throw new BusinessException("CAR_NOT_EXISTS");
+        }
+    }
+    public void checkIfCarAvailability(UUID id){
+        var car=repository.findById(id).orElseThrow();
+        if(!car.getState().equals(State.Available)){
+            throw new BusinessException("CAR_NOT_AVAILABLE");
         }
     }
 }

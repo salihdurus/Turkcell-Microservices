@@ -12,7 +12,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class GetAllFiltersResponse {
-    private UUID id;
+    private String id;
     private UUID brandId;
     private UUID modelId;
     private UUID carId;

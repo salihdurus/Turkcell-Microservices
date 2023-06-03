@@ -11,7 +11,7 @@ import com.turkcellGY.inventoryservice.business.dto.responses.get.GetBrandRespon
 import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateBrandResponse;
 import com.turkcellGY.inventoryservice.business.rules.BrandBusinessRules;
 import com.turkcellGY.inventoryservice.entities.Brand;
-import com.turkcellGY.inventoryservice.kafka.producer.InventoryProducer;
+import com.turkcellGY.inventoryservice.business.kafka.producer.InventoryProducer;
 import com.turkcellGY.inventoryservice.repository.BrandRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

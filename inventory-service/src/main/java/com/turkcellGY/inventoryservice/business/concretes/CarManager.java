@@ -13,7 +13,7 @@ import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateCarRe
 import com.turkcellGY.inventoryservice.business.rules.CarBusinessRules;
 import com.turkcellGY.inventoryservice.entities.Car;
 import com.turkcellGY.inventoryservice.entities.enums.State;
-import com.turkcellGY.inventoryservice.kafka.producer.InventoryProducer;
+import com.turkcellGY.inventoryservice.business.kafka.producer.InventoryProducer;
 import com.turkcellGY.inventoryservice.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -77,6 +77,17 @@ public class CarManager implements CarService {
         rules.checkIfCarExists(id);
         repository.deleteById(id);
         sendKafkaCarDeletedEvent(id);
+    }
+
+    @Override
+    public void checkIfCarAvailable(UUID id) {
+        rules.checkIfCarExists(id);
+        rules.checkIfCarAvailability(id);
+    }
+
+    @Override
+    public void changeStateByCarId(State state,UUID id) {
+        repository.changeStateByCarId(state,id);
     }
 
     private void sendKafkaCarDeletedEvent(UUID id) {
