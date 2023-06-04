@@ -2,6 +2,9 @@ package com.turkcellGY.inventoryservice.business.concretes;
 
 import com.turkcellGY.commonpackage.events.inventory.CarCreatedEvent;
 import com.turkcellGY.commonpackage.events.inventory.CarDeletedEvent;
+import com.turkcellGY.commonpackage.utils.dto.ClientResponse;
+import com.turkcellGY.commonpackage.utils.exceptions.BusinessException;
+import com.turkcellGY.commonpackage.utils.kafka.producer.KafkaProducer;
 import com.turkcellGY.commonpackage.utils.mappers.ModelMapperService;
 import com.turkcellGY.inventoryservice.business.abstracts.CarService;
 import com.turkcellGY.inventoryservice.business.dto.requests.create.CreateCarRequest;
@@ -13,7 +16,6 @@ import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateCarRe
 import com.turkcellGY.inventoryservice.business.rules.CarBusinessRules;
 import com.turkcellGY.inventoryservice.entities.Car;
 import com.turkcellGY.inventoryservice.entities.enums.State;
-import com.turkcellGY.inventoryservice.business.kafka.producer.InventoryProducer;
 import com.turkcellGY.inventoryservice.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +29,7 @@ public class CarManager implements CarService {
     private final CarRepository repository;
     private final ModelMapperService mapper;
     private final CarBusinessRules rules;
-    private final InventoryProducer producer;
+    private final KafkaProducer producer;
 
     @Override
     public List<GetAllCarsResponse> getAll() {
@@ -61,6 +63,7 @@ public class CarManager implements CarService {
 
         return response;
     }
+
     @Override
     public UpdateCarResponse update(UUID id, UpdateCarRequest request) {
         rules.checkIfCarExists(id);
@@ -80,26 +83,39 @@ public class CarManager implements CarService {
     }
 
     @Override
-    public void checkIfCarAvailable(UUID id) {
-        rules.checkIfCarExists(id);
-        rules.checkIfCarAvailability(id);
+    public ClientResponse checkIfCarAvailable(UUID id) {
+        var response = new ClientResponse();
+        validateCarAvailability(id, response);
+        return response;
     }
 
     @Override
-    public void changeStateByCarId(State state,UUID id) {
-        repository.changeStateByCarId(state,id);
+    public void changeStateByCarId(State state, UUID id) {
+        repository.changeStateByCarId(state, id);
     }
 
     private void sendKafkaCarDeletedEvent(UUID id) {
         //Car deleted event
-        CarDeletedEvent event=new CarDeletedEvent();
+        CarDeletedEvent event = new CarDeletedEvent();
         event.setCarId(id);
-        producer.sendMessage(event);
+        producer.sendMessage(event, "car-deleted");
     }
 
     private void sendKafkaCarCreatedEvent(Car createdCar) {
         // Car created event
         var event = mapper.forResponse().map(createdCar, CarCreatedEvent.class);
-        producer.sendMessage(event);
+        producer.sendMessage(event, "car-created");
+    }
+
+    private void validateCarAvailability(UUID id, ClientResponse response) {
+        try {
+            rules.checkIfCarExists(id);
+            rules.checkIfCarAvailability(id);
+            response.setSuccess(true);
+
+        } catch (BusinessException exception) {
+            response.setSuccess(false);
+            response.setMessage(exception.getMessage());
+        }
     }
 }

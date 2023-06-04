@@ -16,6 +16,10 @@ spring:
       bootstrap-servers: http://localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
 eureka:
   client:
     fetch-registry: true
@@ -25,5 +29,13 @@ eureka:
   instance:
     instance-id: ${spring.application.name}:${random.value}
     prefer-ip-address: true
+
+resilience4j:
+  retry:
+    instances:
+      isCarAvailable:
+        max-attempts: 6
+        waitDuration: 2s
+
 server:
   port: 0

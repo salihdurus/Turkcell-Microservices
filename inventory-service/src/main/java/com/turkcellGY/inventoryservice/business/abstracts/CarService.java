@@ -1,5 +1,6 @@
 package com.turkcellGY.inventoryservice.business.abstracts;
 
+import com.turkcellGY.commonpackage.utils.dto.ClientResponse;
 import com.turkcellGY.inventoryservice.business.dto.requests.create.CreateCarRequest;
 import com.turkcellGY.inventoryservice.business.dto.requests.update.UpdateCarRequest;
 import com.turkcellGY.inventoryservice.business.dto.responses.create.CreateCarResponse;
@@ -22,7 +23,7 @@ public interface CarService {
 
     void delete(UUID id);
 
-    void checkIfCarAvailable(UUID id);
+    ClientResponse checkIfCarAvailable(UUID id);
 
     void changeStateByCarId(State state, UUID id);
 }

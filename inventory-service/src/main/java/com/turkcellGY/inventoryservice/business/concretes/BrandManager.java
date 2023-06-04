@@ -1,6 +1,7 @@
 package com.turkcellGY.inventoryservice.business.concretes;
 
 import com.turkcellGY.commonpackage.events.inventory.BrandDeletedEvent;
+import com.turkcellGY.commonpackage.utils.kafka.producer.KafkaProducer;
 import com.turkcellGY.commonpackage.utils.mappers.ModelMapperService;
 import com.turkcellGY.inventoryservice.business.abstracts.BrandService;
 import com.turkcellGY.inventoryservice.business.dto.requests.create.CreateBrandRequest;
@@ -11,7 +12,6 @@ import com.turkcellGY.inventoryservice.business.dto.responses.get.GetBrandRespon
 import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateBrandResponse;
 import com.turkcellGY.inventoryservice.business.rules.BrandBusinessRules;
 import com.turkcellGY.inventoryservice.entities.Brand;
-import com.turkcellGY.inventoryservice.business.kafka.producer.InventoryProducer;
 import com.turkcellGY.inventoryservice.repository.BrandRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,8 +25,7 @@ public class BrandManager implements BrandService {
     private final BrandRepository repository;
     private final ModelMapperService mapper;
     private final BrandBusinessRules rules;
-    private final InventoryProducer producer;
-
+    private final KafkaProducer producer;
     @Override
     public List<GetAllBrandsResponse> getAll() {
         var brands = repository.findAll();
@@ -75,6 +74,6 @@ public class BrandManager implements BrandService {
     }
 
     private void sendKafkaBrandDeletedEvent(UUID id) {
-        producer.sendMessage(new BrandDeletedEvent(id));
+        producer.sendMessage(new BrandDeletedEvent(id),"brand-deleted");
     }
 }
