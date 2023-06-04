@@ -52,4 +52,5 @@ public class CarsController {
     public ClientResponse checkIfCarAvailable(@PathVariable UUID id){
         return service.checkIfCarAvailable(id);
     }
+
 }
