@@ -20,7 +20,7 @@ spring:
 resilience4j:
   retry:
     instances:
-      carChangeState:
+      isCarAvailable:
         max-attempts: 6
         waitDuration: 2s
 eureka:

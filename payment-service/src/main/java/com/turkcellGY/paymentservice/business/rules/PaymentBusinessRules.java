@@ -1,5 +1,6 @@
 package com.turkcellGY.paymentservice.business.rules;
 
+import com.turkcellGY.commonpackage.utils.dto.CreateRentalPaymentRequest;
 import com.turkcellGY.commonpackage.utils.exceptions.BusinessException;
 import com.turkcellGY.paymentservice.repository.PaymentRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,17 +25,17 @@ public class PaymentBusinessRules {
         }
     }
 
-//    public void checkIfPaymentValid(CreateRentalPaymentRequest request) {
-//        if (!repository.existsByCardNumberAndCardHolderAndCardExpirationYearAndCardExpirationMonthAndCardCvv(
-//                request.getCardNumber(),
-//                request.getCardHolder(),
-//                request.getCardExpirationYear(),
-//                request.getCardExpirationMonth(),
-//                request.getCardCvv()
-//        )) {
-//            throw new BusinessException("NOT_A_VALID_PAYMENT");
-//        }
-//    }
+    public void checkIfPaymentValid(CreateRentalPaymentRequest request) {
+        if (!repository.existsByCardNumberAndCardHolderAndCardExpirationYearAndCardExpirationMonthAndCardCvv(
+                request.getCardNumber(),
+                request.getCardHolder(),
+                request.getCardExpirationYear(),
+                request.getCardExpirationMonth(),
+                request.getCardCvv()
+        )) {
+            throw new BusinessException("NOT_A_VALID_PAYMENT");
+        }
+    }
 
     public void checkIfBalanceIsEnough(double balance, double price) {
         if (balance < price) {

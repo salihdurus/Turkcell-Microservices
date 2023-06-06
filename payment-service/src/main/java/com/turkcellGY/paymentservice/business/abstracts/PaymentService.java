@@ -1,6 +1,7 @@
 package com.turkcellGY.paymentservice.business.abstracts;
 
 import com.turkcellGY.commonpackage.utils.dto.ClientResponse;
+import com.turkcellGY.commonpackage.utils.dto.CreateRentalPaymentRequest;
 import com.turkcellGY.paymentservice.business.dto.requests.create.CreatePaymentRequest;
 import com.turkcellGY.paymentservice.business.dto.requests.update.UpdatePaymentRequest;
 import com.turkcellGY.paymentservice.business.dto.responses.create.CreatePaymentResponse;
@@ -17,5 +18,5 @@ public interface PaymentService {
     CreatePaymentResponse add(CreatePaymentRequest request);
     UpdatePaymentResponse update(UUID id, UpdatePaymentRequest request);
     void delete(UUID id);
-//    ClientResponse processPayment(CreateRentalPaymentRequest request);
+    ClientResponse processPayment(CreateRentalPaymentRequest request);
 }

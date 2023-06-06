@@ -36,6 +36,9 @@ resilience4j:
       isCarAvailable:
         max-attempts: 6
         waitDuration: 2s
+      paymentStatus:
+        max-attempts: 6
+        waitDuration: 2s
 
 server:
   port: 0

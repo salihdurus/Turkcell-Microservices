@@ -1,7 +1,11 @@
 package com.turkcellGY.paymentservice.business.concretes;
 
+import com.turkcellGY.commonpackage.utils.dto.ClientResponse;
+import com.turkcellGY.commonpackage.utils.dto.CreateRentalPaymentRequest;
+import com.turkcellGY.commonpackage.utils.exceptions.BusinessException;
 import com.turkcellGY.commonpackage.utils.mappers.ModelMapperService;
 import com.turkcellGY.paymentservice.business.abstracts.PaymentService;
+import com.turkcellGY.paymentservice.business.abstracts.PosService;
 import com.turkcellGY.paymentservice.business.dto.requests.create.CreatePaymentRequest;
 import com.turkcellGY.paymentservice.business.dto.requests.update.UpdatePaymentRequest;
 import com.turkcellGY.paymentservice.business.dto.responses.create.CreatePaymentResponse;
@@ -23,7 +27,7 @@ public class PaymentManager implements PaymentService {
     private final PaymentRepository repository;
     private final ModelMapperService mapper;
     private final PaymentBusinessRules rules;
-
+    private final PosService posService;
     @Override
     public List<GetAllPaymentsResponse> getAll() {
         var payments = repository.findAll();
@@ -34,32 +38,55 @@ public class PaymentManager implements PaymentService {
     public GetPaymentResponse getById(UUID id) {
         rules.checkIfPaymentExists(id);
         var payment = repository.findById(id).orElseThrow();
-        return mapper.forResponse().map(payment,GetPaymentResponse.class);
+        return mapper.forResponse().map(payment, GetPaymentResponse.class);
     }
 
     @Override
     public CreatePaymentResponse add(CreatePaymentRequest request) {
         rules.checkIfCardNumberExists(request.getCardNumber());
-        Payment payment=new Payment();
-        mapper.forRequest().map(request,Payment.class);
+        Payment payment =
+                mapper.forRequest().map(request, Payment.class);
         payment.setId(UUID.randomUUID());
         repository.save(payment);
-        return mapper.forResponse().map(payment,CreatePaymentResponse.class);
+        return mapper.forResponse().map(payment, CreatePaymentResponse.class);
     }
 
     @Override
     public UpdatePaymentResponse update(UUID id, UpdatePaymentRequest request) {
         rules.checkIfPaymentExists(id);
-        var payment = new Payment();
-        mapper.forRequest().map(request,Payment.class);
+        var payment =
+                mapper.forRequest().map(request, Payment.class);
         payment.setId(id);
         repository.save(payment);
-        return mapper.forResponse().map(payment,UpdatePaymentResponse.class);
+        return mapper.forResponse().map(payment, UpdatePaymentResponse.class);
     }
 
     @Override
     public void delete(UUID id) {
         rules.checkIfPaymentExists(id);
         repository.deleteById(id);
+    }
+
+    @Override
+    public ClientResponse processPayment(CreateRentalPaymentRequest request) {
+        var response = new ClientResponse();
+        processPaymentTransaction(request, response);
+
+        return response;
+    }
+    private void processPaymentTransaction(CreateRentalPaymentRequest request, ClientResponse response) {
+        try {
+            rules.checkIfPaymentValid(request);
+            var payment = repository.findByCardNumber(request.getCardNumber());
+            double balance = payment.getBalance();
+            rules.checkIfBalanceIsEnough(balance, request.getPrice());
+            posService.pay();
+            payment.setBalance(balance - request.getPrice());
+            repository.save(payment);
+            response.setSuccess(true);
+        } catch (BusinessException exception) {
+            response.setSuccess(false);
+            response.setMessage(exception.getMessage());
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.turkcellGY.paymentservice.api.controllers;
 
+import com.turkcellGY.commonpackage.utils.dto.ClientResponse;
+import com.turkcellGY.commonpackage.utils.dto.CreateRentalPaymentRequest;
 import com.turkcellGY.paymentservice.business.abstracts.PaymentService;
 import com.turkcellGY.paymentservice.business.dto.requests.create.CreatePaymentRequest;
 import com.turkcellGY.paymentservice.business.dto.requests.update.UpdatePaymentRequest;
@@ -48,8 +50,8 @@ public class PaymentsController {
         service.delete(id);
     }
 
-//    @PostMapping("/check")
-//    public ClientResponse proccessPayment(@RequestBody CreateRentalPaymentRequest request) {
-//        return service.processPayment(request);
-//    }
+    @PostMapping("/check")
+    public ClientResponse proccessPayment(@RequestBody CreateRentalPaymentRequest request) {
+        return service.processPayment(request);
+    }
 }
