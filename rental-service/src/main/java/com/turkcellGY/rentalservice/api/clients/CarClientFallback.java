@@ -1,6 +1,7 @@
 package com.turkcellGY.rentalservice.api.clients;
 
 import com.turkcellGY.commonpackage.utils.dto.ClientResponse;
+import com.turkcellGY.commonpackage.utils.dto.GetCarResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,12 @@ public class CarClientFallback implements CarClient{
     @Override
     public ClientResponse checkIfCarAvailable(UUID carId) {
         log.info("CAR SERVICE IS DOWN!");
+        throw new RuntimeException("INVENTORY SERVICE IS DOWN!");
+    }
+
+    @Override
+    public GetCarResponse getById(UUID carId) {
+        log.info("INVENTORY SERVICE IS DOWN!");
         throw new RuntimeException("INVENTORY SERVICE IS DOWN!");
     }
 }

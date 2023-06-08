@@ -1,6 +1,6 @@
 package com.turkcellGY.inventoryservice.business.dto.responses.get;
 
-import com.turkcellGY.inventoryservice.entities.enums.State;
+import com.turkcellGY.commonpackage.utils.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

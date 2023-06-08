@@ -1,6 +1,7 @@
-package com.turkcellGY.inventoryservice.business.dto.responses.get;
+package com.turkcellGY.commonpackage.utils.dto;
 
-import com.turkcellGY.inventoryservice.entities.enums.State;
+
+import com.turkcellGY.commonpackage.utils.enums.State;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,6 @@ public class GetCarResponse {
     private String plate;
     private State state;
     private double dailyPrice;
+    private String modelName;
+    private String brandName;
 }

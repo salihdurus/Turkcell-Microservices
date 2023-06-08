@@ -3,7 +3,7 @@ package com.turkcellGY.inventoryservice.business.kafka.consumer;
 import com.turkcellGY.commonpackage.events.maintenance.MaintenanceCompleteEvent;
 import com.turkcellGY.commonpackage.events.maintenance.MaintenanceCreatedEvent;
 import com.turkcellGY.inventoryservice.business.abstracts.CarService;
-import com.turkcellGY.inventoryservice.entities.enums.State;
+import com.turkcellGY.commonpackage.utils.enums.State;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

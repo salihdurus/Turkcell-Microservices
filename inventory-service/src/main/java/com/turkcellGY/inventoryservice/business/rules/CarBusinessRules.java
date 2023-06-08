@@ -1,7 +1,7 @@
 package com.turkcellGY.inventoryservice.business.rules;
 
 import com.turkcellGY.commonpackage.utils.exceptions.BusinessException;
-import com.turkcellGY.inventoryservice.entities.enums.State;
+import com.turkcellGY.commonpackage.utils.enums.State;
 import com.turkcellGY.inventoryservice.repository.CarRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

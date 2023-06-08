@@ -1,6 +1,6 @@
 package com.turkcellGY.inventoryservice.entities;
 
-import com.turkcellGY.inventoryservice.entities.enums.State;
+import com.turkcellGY.commonpackage.utils.enums.State;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -5,9 +5,9 @@ import com.turkcellGY.inventoryservice.business.dto.requests.create.CreateCarReq
 import com.turkcellGY.inventoryservice.business.dto.requests.update.UpdateCarRequest;
 import com.turkcellGY.inventoryservice.business.dto.responses.create.CreateCarResponse;
 import com.turkcellGY.inventoryservice.business.dto.responses.get.GetAllCarsResponse;
-import com.turkcellGY.inventoryservice.business.dto.responses.get.GetCarResponse;
+import com.turkcellGY.commonpackage.utils.dto.GetCarResponse;
 import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateCarResponse;
-import com.turkcellGY.inventoryservice.entities.enums.State;
+import com.turkcellGY.commonpackage.utils.enums.State;
 
 import java.util.List;
 import java.util.UUID;

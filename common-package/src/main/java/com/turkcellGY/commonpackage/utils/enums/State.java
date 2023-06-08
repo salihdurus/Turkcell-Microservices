@@ -1,4 +1,4 @@
-package com.turkcellGY.inventoryservice.entities.enums;
+package com.turkcellGY.commonpackage.utils.enums;
 
 public enum State {
     Available,

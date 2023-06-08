@@ -1,3 +1,6 @@
 
-b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÖÒø¦8Ì¢èœˆ1
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÖÒø¦8Ì¢èœˆ1
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ÖÒø¦8Ñá½ç‰1
+x
+java:S1192"[Define a constant instead of duplicating this literal "INVENTORY SERVICE IS DOWN!" 3 times.(ÖÒø¦8Ÿ¿¾ç‰1
 v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(÷ ’º8Î¢èœˆ1

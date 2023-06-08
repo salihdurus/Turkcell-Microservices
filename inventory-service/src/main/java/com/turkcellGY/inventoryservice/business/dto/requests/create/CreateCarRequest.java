@@ -2,7 +2,6 @@ package com.turkcellGY.inventoryservice.business.dto.requests.create;
 
 import com.turkcellGY.commonpackage.utils.annotations.NotFutureYear;
 import com.turkcellGY.commonpackage.utils.constans.Regex;
-import com.turkcellGY.inventoryservice.entities.enums.State;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

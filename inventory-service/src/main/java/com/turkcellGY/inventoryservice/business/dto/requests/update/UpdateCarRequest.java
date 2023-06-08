@@ -2,7 +2,7 @@ package com.turkcellGY.inventoryservice.business.dto.requests.update;
 
 import com.turkcellGY.commonpackage.utils.annotations.NotFutureYear;
 import com.turkcellGY.commonpackage.utils.constans.Regex;
-import com.turkcellGY.inventoryservice.entities.enums.State;
+import com.turkcellGY.commonpackage.utils.enums.State;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -12,6 +12,7 @@
         <module name="payment-service" />
         <module name="maintenance-service" />
         <module name="common-package" />
+        <module name="invoice-service" />
         <module name="api-gateway" />
         <module name="filter-service" />
         <module name="rental-service" />
@@ -26,6 +27,7 @@
       <module name="discovery-server" options="-parameters" />
       <module name="filter-service" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
+      <module name="invoice-service" options="-parameters" />
       <module name="maintenance-service" options="-parameters" />
       <module name="payment-service" options="-parameters" />
       <module name="rental-service" options="-parameters" />

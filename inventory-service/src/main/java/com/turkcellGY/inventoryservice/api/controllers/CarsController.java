@@ -6,7 +6,7 @@ import com.turkcellGY.inventoryservice.business.dto.requests.create.CreateCarReq
 import com.turkcellGY.inventoryservice.business.dto.requests.update.UpdateCarRequest;
 import com.turkcellGY.inventoryservice.business.dto.responses.create.CreateCarResponse;
 import com.turkcellGY.inventoryservice.business.dto.responses.get.GetAllCarsResponse;
-import com.turkcellGY.inventoryservice.business.dto.responses.get.GetCarResponse;
+import com.turkcellGY.commonpackage.utils.dto.GetCarResponse;
 import com.turkcellGY.inventoryservice.business.dto.responses.update.UpdateCarResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
