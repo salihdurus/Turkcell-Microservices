@@ -10,6 +10,18 @@ services:
 #    environment:
 #      KAFKA_ADVERTISED_LISTENERS:PLAINTEXT://<UZAK AĞ IP>:9092
 
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    command:
+      - start-dev
+    volumes:
+      - .:/opt/jboss/keycloak/imports
   mongodb:
     container_name: filter-db-dev
     image: mongo
