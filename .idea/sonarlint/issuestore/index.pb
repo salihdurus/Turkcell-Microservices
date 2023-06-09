@@ -173,8 +173,6 @@ E
 config-server/pom.xml,a\2\a2f9618c8ad821b143a07a29a9805fcb0b2df470
 „
 Tconfig-server/src/main/java/com/turkcellGY/configserver/ConfigServerApplication.java,f\9\f9efd98d329f6d2a25fc1ad78e1d4984bcb06536
-C
-api-gateway/pom.xml,2\b\2bfa2b108f2439e99e004f4085b58c22cf995f73
 H
 discovery-server/pom.xml,2\c\2c58c7878e43d126fc56cae853d5b06de57d0b3e
 I
@@ -223,8 +221,6 @@ acommon-package/src/main/java/com/turkcellGY/commonpackage/events/invoice/Invoic
 _rental-service/src/main/java/com/turkcellGY/rentalservice/business/concretes/RentalManager.java,2\3\23b509b98342fc1fd1d6023db6aee0dbd50fc903
 ˜
 hrental-service/src/main/java/com/turkcellGY/rentalservice/business/dto/requests/CreateRentalRequest.java,5\a\5a2d0bc4215f73e78353327b9b524a32c4d4a0e9
-B
-docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
 –
 fcommon-package/src/main/java/com/turkcellGY/commonpackage/utils/security/KeycloakJwtRoleConverter.java,6\2\62d4f5e2f3ea65f95ac362cb1281ccff55dd6988
 ƒ

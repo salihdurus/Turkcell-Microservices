@@ -12,14 +12,12 @@
         <module name="payment-service" />
         <module name="maintenance-service" />
         <module name="invoice-service" />
+        <module name="common-package" />
         <module name="api-gateway" />
         <module name="filter-service" />
         <module name="rental-service" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="common-package" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
